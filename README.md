@@ -13,4 +13,4 @@ How to use
 Currently it is recommended to install the [MultiVerse plugin for CraftBukkit](http://dev.bukkit.org/bukkit-plugins/multiverse-core/) alongside Fjord.
 You can then create a world using the command:
 
-`/mv create <worldname> normal -g Fjord
+`/mv create <worldname> normal -g Fjord`
