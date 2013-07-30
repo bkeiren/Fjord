@@ -1,0 +1,16 @@
+name: Fjord
+main: com.bryankeiren.fjord.Fjord
+version: 0.0.1
+commands:
+    fjord:
+        aliases: [fj]
+        description: Allows you to access Fjord functions.
+        usage: /<command>
+permissions:
+  fjord.*:
+    description: Provides access to all Fjord commands.
+    children:
+      fjord.version: true
+  fjord.version:
+    default: op
+    description: Allows you to view the current Fjord version.
