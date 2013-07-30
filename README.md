@@ -19,7 +19,7 @@ You can then create a world using the command:
 Links
 ------
 
-This project contains (partial) code form the following projects:
+This project contains (partial) code from the following projects:
 - [libnoiseforjava](https://github.com/TJHJava/libnoiseforjava)
 - [Nordic](https://github.com/s1mpl3x/Nordic)
 - [Jtjj222's list of awesome block populators](https://forums.bukkit.org/threads/jtjj222s-list-of-awesome-block-populators.106946/)
