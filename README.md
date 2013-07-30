@@ -5,7 +5,7 @@ Fjord
 
 -----
 
-Fjord is a terrain-generator plugin aimed at providing terrain somewhat similar to scandinavian [fjords](https://en.wikipedia.org/wiki/Fjord) and highland.
+Fjord is a terrain-generator plugin aimed at providing terrain somewhat similar to Scandinavian [fjords](https://en.wikipedia.org/wiki/Fjord) and highland.
 
 Screenshots
 -----
