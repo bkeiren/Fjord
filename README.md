@@ -11,9 +11,12 @@ Screenshots
 -----
 
 ![](http://i.imgur.com/KZ105aKh.jpg)
-![](http://i.imgur.com/KZ105aKh.jpg)
-![](http://i.imgur.com/KZ105aKh.jpg)
-![](http://i.imgur.com/KZ105aKh.jpg)![](http://i.imgur.com/KZ105aKh.jpg)
+![](http://i.imgur.com/hh5Bsnrh.jpg)
+![](http://i.imgur.com/ylkLniQh.jpg)
+![](http://i.imgur.com/bblXfvuh.jpg)
+![](http://i.imgur.com/jDRdVByh.jpg)
+![](http://i.imgur.com/bTrYjC6h.jpg)
+![](http://i.imgur.com/AHP6w4zh.jpg)
 
 How to use
 -----
