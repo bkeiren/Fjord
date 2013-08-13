@@ -32,6 +32,14 @@ To teleport a player (or yourself) to the newly created Fjord world, use:
 
 For more MultiVerse commands, see the MultiVerse external link.
 
+Commands, permissions and configuration settings
+------
+
+Fjord uses the following commands:
+
+- `/fjord version`: Displays the current Fjord version.
+
+Fjord requires no special permissions other than the permissions required by your World-Management plugin (such as MultiVerse).
 
 Links
 ------
