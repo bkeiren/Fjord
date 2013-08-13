@@ -26,7 +26,7 @@ You can then create a world using the command:
 
 `/mv create <worldname> normal -g Fjord -s <seed>`
 
-To teleport a player (including yourself) to the newly created Fjord world, use:
+To teleport a player (or yourself) to the newly created Fjord world, use:
 
 `/mv tp <playername> <worldname>`
 

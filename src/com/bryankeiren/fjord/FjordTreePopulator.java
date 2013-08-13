@@ -20,7 +20,7 @@ import org.bukkit.util.noise.SimplexOctaveGenerator;
 public class FjordTreePopulator extends BlockPopulator 
 {	
 	private float minDensity = 0.0f;
-	private float maxDensity = 0.2f;
+	private float maxDensity = 0.1f;
 	private float redwoodVsTallredwoodDistribution = 0.5f;
 	
 	private SimplexOctaveGenerator gen1 = null;
@@ -38,12 +38,22 @@ public class FjordTreePopulator extends BlockPopulator
 	
 	@Override
 	public void populate( World world, Random random, Chunk chunk )
-	{		
+	{
+		//if (true) return;
+		
 		if (gen1 == null)
 		{
 			int numOctaves = 2;
-			gen1 = new SimplexOctaveGenerator(world, 2);
+			gen1 = new SimplexOctaveGenerator(world, numOctaves);
 			gen1.setScale(1/128.0);
+		}
+		
+		//float density = minDensity + ((float)((gen1.noise(chunk.getZ() * 16 + 8192, -chunk.getX() * 16 - 8192, 0.2, 0.7) + 1.0) * 0.5) * (maxDensity - minDensity));
+		double density = minDensity + ((float)((gen1.noise(chunk.getZ() * 16 + 8192, -chunk.getX() * 16 - 8192, 0.2, 0.7) + 1.0) * 0.5) * (maxDensity - minDensity));
+		
+		if (density <= 0.0) 
+		{
+			return;	// Skip this chunk.
 		}
 		
 		int realZ = chunk.getZ() * 16;
@@ -55,7 +65,8 @@ public class FjordTreePopulator extends BlockPopulator
 				float rf = random.nextFloat();
 				
 				// Do a random-check with the density parameter to see if we should place a tree here.
-				float density = minDensity + ((float)((gen1.noise(realX + 8192, -realZ - 8192, 0.2, 0.7) + 1.0) * 0.5) * (maxDensity - minDensity));
+				
+				//if (rf <= density)
 				if (rf <= density)
 				{
 					Block highestBlock = world.getHighestBlockAt(realX, realZ);

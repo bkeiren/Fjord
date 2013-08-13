@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import libnoiseforjava.NoiseGen.NoiseQuality;
+import libnoiseforjava.exception.ExceptionInvalidParam;
+import libnoiseforjava.module.RidgedMulti;
+
 import org.bukkit.craftbukkit.v1_6_R2.generator.NormalChunkGenerator;
 
 public class FjordChunkGenerator extends ChunkGenerator
@@ -130,6 +134,17 @@ public class FjordChunkGenerator extends ChunkGenerator
     	SimplexOctaveGenerator gen5 = new SimplexOctaveGenerator(world, SimplexOctaves3);
     	gen5.setScale(1/8.0);
     	
+    	/*RidgedMulti ridgedMultiGen = new RidgedMulti();
+    	ridgedMultiGen.setFrequency(2);
+    	try {	// Try-catch because else Eclipse whines.
+			ridgedMultiGen.setOctaveCount(1);
+		} catch (ExceptionInvalidParam e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ridgedMultiGen.setNoiseQuality(NoiseQuality.QUALITY_FAST);
+    	ridgedMultiGen.setSeed((int)world.getSeed());*/
+    	
     	int worldMaxHeight = world.getMaxHeight();
     	int numSections = worldMaxHeight / 16;
     	short[][] result = new short[numSections][];
@@ -147,12 +162,23 @@ public class FjordChunkGenerator extends ChunkGenerator
 	    		int multitude = 42;
 	    		int sealevel = 64;
 	    		double noiseValue = 0.0;
-	    		noiseValue += gen1.noise(realX, realZ, frequency, amplitude) * multitude + sealevel;
+	    		double plainsValue = (gen1.noise(realX * 0.43, realZ * -0.43, 0.1, 0.3) + 1.0) * 0.5;
+	    		noiseValue += gen1.noise(realX, realZ, frequency * plainsValue, amplitude) * multitude + sealevel;
 	    		noiseValue += gen2.noise(realX, realZ, 0.8, 0.3) * 16;
 	    		noiseValue += gen3.noise(realX, realZ, 1.7, 0.45) * 8;
-	    		for (int bY = 1; bY < noiseValue; ++bY) 
+	    		for (int bY = 1; bY < noiseValue && bY < worldMaxHeight; ++bY) 
 	    		{
-	    			if (gen4.noise(realX, bY, realZ, 0.7, 0.01 * ((worldMaxHeight - noiseValue) / 12.8)) > -0.7)
+	    			double freq = 1.5;
+	    			double ampl = 0.6;
+	    			
+	    			double f0 = (((bY / noiseValue) - 0.8) / 0.2);
+	    			if (f0 < 0.0) f0 = 0.0;
+	    			if (f0 > 1.0) f0 = 1.0;
+	    			ampl *= 1.0 - f0;
+	    			
+	    			double v = gen4.noise(realX * 0.5, bY * 1.5, realZ, freq, ampl);
+	    			double bandHalfWidth = 0.75;
+	    			if (v > 0.0 - bandHalfWidth && v < bandHalfWidth)
 	    			{
 	    				setBlock(result, bX, bY, bZ, (short)Material.STONE.getId());
 	    			}
@@ -166,7 +192,7 @@ public class FjordChunkGenerator extends ChunkGenerator
 	    		
 	    		DoLayer_Shore(result, world, random, bX, bZ, actualSealevel);
 	    		
-	    		// TODO: DoLayer_SeaBed.
+	    		DoLayer_SeaBed(result, world, random, bX, bZ, actualSealevel);
 
 	    		DoLayer_Ore(result, world, random, bX, bZ, realX, realZ, gen5);
 	    		
@@ -247,6 +273,26 @@ public class FjordChunkGenerator extends ChunkGenerator
     	}
     	
     	// TODO MAYBE: Place gravel below it up until the next solid block so that it doesn't fall down?
+    }
+    
+    private void DoLayer_SeaBed( short[][] result, World world, Random random, int bX, int bZ, int sealevel )
+    {
+    	int highestBlockY = findHighestBlockY(result, world, bX, bZ);
+    	
+    	if (highestBlockY <= sealevel)
+    	{
+	    	for (int i = highestBlockY; i > highestBlockY - 5 && i > 1; --i)
+	    	{
+	    		short currBlockMat = getBlock(result, bX, i, bZ);
+	    		if (currBlockMat != (short)Material.AIR.getId() &&
+	    			currBlockMat != (short)Material.GRAVEL.getId())
+	    		{
+		    		double nextGaussian = random.nextGaussian();
+		    		Material mat = (nextGaussian > -0.2 && nextGaussian < 0.2) ? (Material.CLAY) : (Material.DIRT); 
+		    		setBlock(result, bX, i, bZ, (short)mat.getId());   	
+	    		}
+	    	}
+    	}
     }
     
     private void DoLayer_Sea( short[][] result, World world, Random random, int bX, int bZ, int sealevel )
