@@ -162,10 +162,11 @@ public class FjordChunkGenerator extends ChunkGenerator
 	    		int multitude = 42;
 	    		int sealevel = 64;
 	    		double noiseValue = 0.0;
-	    		double plainsValue = (gen1.noise(realX * 0.43, realZ * -0.43, 0.1, 0.3) + 1.0) * 0.5;
+	    		double plainsValue = (gen1.noise(realX * 0.43, realZ * -0.43, 0.1, 0.3) + 1.0) * 0.5;	    		
 	    		noiseValue += gen1.noise(realX, realZ, frequency * plainsValue, amplitude) * multitude + sealevel;
 	    		noiseValue += gen2.noise(realX, realZ, 0.8, 0.3) * 16;
-	    		noiseValue += gen3.noise(realX, realZ, 1.7, 0.45) * 8;
+	    		noiseValue += gen3.noise(realX, realZ, 1.7, 0.45) * 8; 
+	    		
 	    		for (int bY = 1; bY < noiseValue && bY < worldMaxHeight; ++bY) 
 	    		{
 	    			double freq = 1.5;
@@ -325,7 +326,7 @@ public class FjordChunkGenerator extends ChunkGenerator
     		return;
     	}
     	
-    	int dirtMinDepth = 1;
+    	int dirtMinDepth = 2;
     	int dirtMaxDepth = 7;
     	
     	int dirtDepth = dirtMinDepth + (int)(random.nextGaussian() * (dirtMaxDepth - dirtMinDepth));

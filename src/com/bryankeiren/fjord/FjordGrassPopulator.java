@@ -4,10 +4,12 @@ import java.util.Random;
 
 import org.bukkit.Chunk;
 import org.bukkit.GrassSpecies;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.generator.BlockPopulator;
+import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
 
 public class FjordGrassPopulator extends BlockPopulator 
 {	
@@ -43,9 +45,10 @@ public class FjordGrassPopulator extends BlockPopulator
 						
 						// ...and we have grass below us.
 						if (highestBlockBelow.getType() == Material.GRASS)
-						{							
-							highestBlock.setType(Material.LONG_GRASS);
-							highestBlock.setData((byte)((random.nextFloat() < grassVsFernDistribution) ? 0x1 : 0x2));
+						{		
+							WorldHelper.setBlockTypeAndDataFast((CraftWorld)world, highestBlock.getX(), highestBlock.getY(), highestBlock.getZ(), Material.LONG_GRASS, (byte)((random.nextFloat() < grassVsFernDistribution) ? 0x1 : 0x2));
+							//highestBlock.setType(Material.LONG_GRASS);
+							//highestBlock.setData((byte)((random.nextFloat() < grassVsFernDistribution) ? 0x1 : 0x2));
 						}
 					}
 				}
