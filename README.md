@@ -20,6 +20,11 @@ Screenshots
 ![](http://i.imgur.com/HwHYGIlh.jpg)
 ![](http://i.imgur.com/OPjre4xh.jpg)
 
+Download
+-----
+
+Released files are published at http://dev.bukkit.org/bukkit-plugins/fjord/.
+
 How to use
 -----
 
