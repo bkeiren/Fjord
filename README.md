@@ -17,6 +17,8 @@ Screenshots
 ![](http://i.imgur.com/jDRdVByh.jpg)
 ![](http://i.imgur.com/bTrYjC6h.jpg)
 ![](http://i.imgur.com/AHP6w4zh.jpg)
+![](http://i.imgur.com/HwHYGIlh.jpg)
+![](http://i.imgur.com/OPjre4xh.jpg)
 
 How to use
 -----
