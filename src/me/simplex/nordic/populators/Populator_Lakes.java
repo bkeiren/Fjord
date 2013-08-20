@@ -33,7 +33,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.util.Vector;
 
-public class Nordic_LakePopulator extends BlockPopulator {
+public class Populator_Lakes extends BlockPopulator {
 	
 	private static final int MIN_BLOCK_COUNT  =  450;
 	private static final int MAX_BLOCK_COUNT  =  900;

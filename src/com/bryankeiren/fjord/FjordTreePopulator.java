@@ -1,14 +1,8 @@
 package com.bryankeiren.fjord;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
-import me.jtjj222.BasicTerrain.SchematicsManager;
-
 import org.bukkit.Chunk;
-import org.bukkit.GrassSpecies;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
 import org.bukkit.World;
