@@ -2,7 +2,7 @@ package com.bryankeiren.fjord;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
 
 public class WorldHelper 
 {
