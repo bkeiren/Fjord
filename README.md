@@ -48,6 +48,14 @@ Fjord uses the following commands:
 
 Fjord requires no special permissions other than the permissions required by your World-Management plugin (such as MultiVerse).
 
+Code requirements
+------
+
+If you wish to compile the code yourself, you will need to include the following libraries:
+
+- CraftBukkit.jar ([Get it here](http://dl.bukkit.org/downloads/craftbukkit/), version is up to you)
+- Bukkit.jar (again, version is up to you. This file is hard to come by if you don't want to compile the source yourself, but with a little Googleing you can find one)
+
 Links
 ------
 
