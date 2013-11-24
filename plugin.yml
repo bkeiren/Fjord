@@ -1,6 +1,7 @@
 name: Fjord
 main: com.bryankeiren.fjord.Fjord
 version: 0.2.0
+load: STARTUP
 commands:
     fjord:
         aliases: [fj]
