@@ -222,19 +222,7 @@
     </properties>
 
     <profiles>
-        <profile>
-            <id>jenkins</id>
-            <activation>
-                <property>
-                    <name>env.BUILD_NUMBER</name>
-                </property>
-            </activation>
-            <properties>
-                <project.build.number>${env.BUILD_NUMBER}</project.build.number>
-                <project.build.version>${project.version}-b${project.build.number}</project.build.version>
-                <project.build.name>${env.JOB_NAME}</project.build.name>
-            </properties>
-        </profile>
+        <!-- Not exactly necessary, but I removed a Jenkins profile, so I left this in here -->
         <profile>
             <id>default</id>
             <activation>
@@ -243,7 +231,7 @@
             <properties>
                 <project.build.number>0</project.build.number>
                 <project.build.version>${project.version}-b${project.build.number}</project.build.version>
-                <project.build.name>${project.artifactId}</project.build.name>
+                <project.build.name>${project.name}</project.build.name>
             </properties>
         </profile>
     </profiles>
