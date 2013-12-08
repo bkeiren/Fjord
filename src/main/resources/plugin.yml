@@ -1,12 +1,14 @@
-name: Fjord
+name: ${project.build.name}
 main: com.bryankeiren.fjord.Fjord
-version: 0.2.0
+version: ${project.build.version}
 load: STARTUP
+
 commands:
     fjord:
         aliases: [fj]
         description: Allows you to access Fjord functions.
         usage: /<command>
+
 permissions:
   fjord.*:
     description: Provides access to all Fjord commands.
