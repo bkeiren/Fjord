@@ -34,7 +34,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		populators.add(new Populator_Ores());
 		populators.add(new FjordLavaPopulator());
 		populators.add(new FjordTreePopulator(plugin));
-		populators.add(new FjordGrassPopulator(plugin));
+		populators.add(new FjordGrassPopulator());
 	}
 
 	private void initNoiseGenerators(World world) {
