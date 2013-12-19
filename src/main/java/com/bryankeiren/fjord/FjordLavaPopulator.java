@@ -1,10 +1,11 @@
 package com.bryankeiren.fjord;
 
-import java.util.Random;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
+
+import java.util.Random;
 
 public class FjordLavaPopulator extends BlockPopulator {
 	private int m_MaxUndergroundLavaLakeY = 10;
@@ -15,7 +16,6 @@ public class FjordLavaPopulator extends BlockPopulator {
 			for (int x = 0; x < 16; ++x) {
 				for (int y = 1; y < m_MaxUndergroundLavaLakeY; ++y) {
 					if (chunk.getBlock(x, y, z).getType() == Material.AIR) {
-						//chunk.getBlock(x, y, z).setType(Material.LAVA);
 						WorldHelper.setBlockTypeFast(world, chunk.getX() * 16 + x, y, chunk.getZ() * 16 + z, Material.LAVA);
 					}
 				}
