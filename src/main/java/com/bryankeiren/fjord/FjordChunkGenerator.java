@@ -65,11 +65,6 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		}
 	}
 
-	//This converts relative chunk locations to bytes that can be written to the chunk
-	public int xyzToByte(int x, int y, int z) {
-		return (x * 16 + z) * 128 + y;
-	}
-
 	@Deprecated
 	public byte[] generate(World world, Random rand, int chunkx, int chunkz) {
 		throw new UnsupportedOperationException("Custom generator is missing required methods: generate(), generateBlockSections() and generateExtBlockSections()");
@@ -77,6 +72,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 
 	// Compared to generateBlockSections, this function has extended block ID support. That means that the block ID
 	// range is [0..4095] (note the fact that the functions returns a 2D array of short instead of byte).
+	@Override
 	public short[][] generateExtBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
 		InitNoiseGenerators(world);
 
@@ -124,8 +120,6 @@ public class FjordChunkGenerator extends ChunkGenerator {
 				DoLayer_Shore(result, world, random, bX, bZ, actualSealevel);
 
 				DoLayer_SeaBed(result, world, random, bX, bZ, actualSealevel);
-
-				//DoLayer_Ore(result, world, random, bX, bZ, realX, realZ, gen5);
 
 				DoLayer_Sea(result, world, random, bX, bZ, actualSealevel);
 
