@@ -1,20 +1,16 @@
 package com.bryankeiren.fjord;
 
-import java.util.Random;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.generator.BlockPopulator;
 
+import java.util.Random;
+
 public class FjordGrassPopulator extends BlockPopulator {
 	private float density = 0.35f;
 	private float grassVsFernDistribution = 0.6f;
-	private Fjord plugin = null;
-
-	public FjordGrassPopulator(Fjord _plugin) {
-		plugin = _plugin;
-	}
 
 	@Override
 	public void populate(World world, Random random, Chunk chunk) {
@@ -34,9 +30,9 @@ public class FjordGrassPopulator extends BlockPopulator {
 
 						// ...and we have grass below us.
 						if (highestBlockBelow.getType() == Material.GRASS) {
-							WorldHelper.setBlockTypeAndDataFast(world, highestBlock.getX(), highestBlock.getY(), highestBlock.getZ(), Material.LONG_GRASS, (byte) ((random.nextFloat() < grassVsFernDistribution) ? 0x1 : 0x2));
-							//highestBlock.setType(Material.LONG_GRASS);
-							//highestBlock.setData((byte)((random.nextFloat() < grassVsFernDistribution) ? 0x1 : 0x2));
+							WorldHelper.setBlockTypeAndDataFast(world, highestBlock.getX(), highestBlock.getY(),
+									highestBlock.getZ(), Material.LONG_GRASS, (byte) ((random.nextFloat() <
+									grassVsFernDistribution) ? 0x1 : 0x2));
 						}
 					}
 				}
