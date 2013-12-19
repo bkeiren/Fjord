@@ -42,8 +42,8 @@ public class FjordWaterStreamPopulator extends BlockPopulator {
 		int dZ = 0;
 
 		BlockFace[] blockFaces = {BlockFace.NORTH, BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH};
-		for (int i = 0; i < blockFaces.length; ++i) {
-			Block neighbour = origin.getRelative(blockFaces[i]);
+		for (BlockFace blockFace : blockFaces) {
+			Block neighbour = origin.getRelative(blockFace);
 			if (neighbour.getType() == Material.AIR &&
 					neighbour.getRelative(BlockFace.DOWN).getType() == Material.AIR) {
 				dX = origin.getX() - neighbour.getX();
