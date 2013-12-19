@@ -38,7 +38,7 @@ public class WorldHelper
 	public static int getBlockId(World w, int x, int y, int z) {
 		try {
 			Object world = ReflectionUtil.invokeMethod("getHandle", w.getClass(), w);
-			return (Byte) ReflectionUtil.invokeMethod("getTypeId", world.getClass(), world, x, y, z);
+			return (Integer) ReflectionUtil.invokeMethod("getTypeId", world.getClass(), world, x, y, z);
 		} catch (Exception e) {
 			return 0;
 		}
