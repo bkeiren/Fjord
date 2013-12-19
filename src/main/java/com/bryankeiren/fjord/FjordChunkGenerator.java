@@ -62,18 +62,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		if (gen5 == null) {
 			gen5 = new SimplexOctaveGenerator(world, 4);
 			gen5.setScale(1 / 8.0);
-		}	
-
-    	/*RidgedMulti ridgedMultiGen = new RidgedMulti();
-    	ridgedMultiGen.setFrequency(2);
-    	try {	// Try-catch because else Eclipse whines.
-			ridgedMultiGen.setOctaveCount(1);
-		} catch (ExceptionInvalidParam e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-    	ridgedMultiGen.setNoiseQuality(NoiseQuality.QUALITY_FAST);
-    	ridgedMultiGen.setSeed((int)world.getSeed());*/
 	}
 
 	//This converts relative chunk locations to bytes that can be written to the chunk
@@ -147,7 +136,6 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		}
 
 		return result;
-		//return null; // Default - returns null, which drives call to generateBlockSections()
 	}
 
 	@Override
@@ -160,14 +148,8 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		Block highestBlock = world.getHighestBlockAt(x, z).getRelative(BlockFace.DOWN);
 
 		Material highestBlockType = highestBlock.getType();
-		if (highestBlockType == Material.SAND ||
-				highestBlockType == Material.GRAVEL ||
-				highestBlockType == Material.GRASS ||
-				highestBlockType == Material.STONE) {
-			return true;
-		}
-
-		return false;
+		return highestBlockType == Material.SAND || highestBlockType == Material.GRAVEL ||
+				highestBlockType == Material.GRASS || highestBlockType == Material.STONE;
 	}
 
 	@Override
@@ -332,61 +314,6 @@ public class FjordChunkGenerator extends ChunkGenerator {
 
 		if (highestBlockY + 1 < world.getMaxHeight()) {
 			setBlock(result, bX, highestBlockY + 1, bZ, (short) Material.SNOW.getId());
-		}
-	}
-
-	private void DoLayer_Ore(short[][] result, World world, Random random, int bX, int bZ, int realX, int realZ, SimplexOctaveGenerator gen) {
-		int highestBlockY = findHighestBlockY(result, world, bX, bZ);
-
-		for (int bY = 1; bY < highestBlockY; ++bY)    // Can skip y == 0 because we filled that level with bedrock.
-		{
-			double noise = gen.noise(realX, bY, realZ, 5, 0.005, 0.1);
-
-			if (noise > 0.75) {
-				if (getBlock(result, bX, bY, bZ) != (short) Material.AIR.getId()) {
-					double gaussianDouble = Math.abs(random.nextGaussian()) / 3.0;    // Workable range [0..1].
-
-					// Ores that we want, ordered by chance of occurence: (The gaussian distribution
-					// of the random double will help us properly distribute)
-					// Coal
-					// Iron
-					// Gold
-					// Lapis Lazuli
-					// Redstone
-					// Diamond
-					short[] ores = {(short) Material.COAL_ORE.getId(),
-							(short) Material.IRON_ORE.getId(),
-							(short) Material.GOLD_ORE.getId(),
-							(short) Material.LAPIS_ORE.getId(),
-							(short) Material.REDSTONE_ORE.getId(),
-							(short) Material.DIAMOND_ORE.getId()};
-
-					int[] oreLayersMin = {5,
-							5,
-							5,
-							14,
-							5,
-							5};
-					int[] oreLayersMax = {132,
-							68,
-							34,
-							34,
-							16,
-							16};
-
-					double d = 1.0 / ores.length;
-					for (int i = 0; i < ores.length; ++i) {
-						double threshold = i * d;
-						if (gaussianDouble > threshold &&
-								gaussianDouble < threshold + d &&
-								bY >= oreLayersMin[i] &&
-								bY <= oreLayersMax[i]) {
-							setBlock(result, bX, bY, bZ, ores[i]);
-							break;
-						}
-					}
-				}
-			}
 		}
 	}
 }
