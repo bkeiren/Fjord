@@ -11,11 +11,6 @@ import java.util.Random;
 public class FjordGrassPopulator extends BlockPopulator {
 	private float density = 0.35f;
 	private float grassVsFernDistribution = 0.6f;
-	private Fjord plugin = null;
-
-	public FjordGrassPopulator(Fjord _plugin) {
-		plugin = _plugin;
-	}
 
 	@Override
 	public void populate(World world, Random random, Chunk chunk) {
@@ -36,7 +31,7 @@ public class FjordGrassPopulator extends BlockPopulator {
 						// ...and we have grass below us.
 						if (highestBlockBelow.getType() == Material.GRASS) {
 							WorldHelper.setBlockTypeAndDataFast(world, highestBlock.getX(), highestBlock.getY(),
-									highestBlock.getZ(),  Material.LONG_GRASS, (byte) ((random.nextFloat() <
+									highestBlock.getZ(), Material.LONG_GRASS, (byte) ((random.nextFloat() <
 									grassVsFernDistribution) ? 0x1 : 0x2));
 						}
 					}
