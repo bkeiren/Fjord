@@ -37,7 +37,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		populators.add(new FjordGrassPopulator(plugin));
 	}
 
-	private void InitNoiseGenerators(World world) {
+	private void initNoiseGenerators(World world) {
 		// Initialize noise generators.
 		if (gen1 == null) {
 			gen1 = new SimplexOctaveGenerator(world, 8);
@@ -74,7 +74,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 	// range is [0..4095] (note the fact that the functions returns a 2D array of short instead of byte).
 	@Override
 	public short[][] generateExtBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
-		InitNoiseGenerators(world);
+		initNoiseGenerators(world);
 
 		int worldMaxHeight = world.getMaxHeight();
 		int numSections = worldMaxHeight / 16;
@@ -82,7 +82,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 
 		for (int bZ = 0; bZ < 16; ++bZ) {
 			for (int bX = 0; bX < 16; ++bX) {
-				DoLayer_Bedrock(result, random, bX, bZ);
+				doLayerBedrock(result, random, bX, bZ);
 
 				int realX = bX + x * 16;    // x == X of the chunk.
 				int realZ = bZ + z * 16;    // z == Z of the chunk.
@@ -117,15 +117,15 @@ public class FjordChunkGenerator extends ChunkGenerator {
 
 				int actualSealevel = (int) (sealevel * 0.75f);
 
-				DoLayer_Shore(result, world, random, bX, bZ, actualSealevel);
+				doLayerShore(result, world, random, bX, bZ, actualSealevel);
 
-				DoLayer_SeaBed(result, world, random, bX, bZ, actualSealevel);
+				doLayerSeabed(result, world, random, bX, bZ, actualSealevel);
 
-				DoLayer_Sea(result, world, random, bX, bZ, actualSealevel);
+				doLayerSea(result, world, random, bX, bZ, actualSealevel);
 
-				DoLayer_GrassAndDirt(result, world, random, bX, bZ);
+				doLayerGrassAndDirt(result, world, random, bX, bZ);
 
-				DoLayer_Snow(result, world, random, bX, bZ, taigaBorder);
+				doLayerSnow(result, world, random, bX, bZ, taigaBorder);
 			}
 		}
 
@@ -187,7 +187,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		return 0;
 	}
 
-	private void DoLayer_Bedrock(short[][] result, Random random, int bX, int bZ) {
+	private void doLayerBedrock(short[][] result, Random random, int bX, int bZ) {
 		setBlock(result, bX, 0, bZ, (short) Material.BEDROCK.getId());    // One layer of bedrock.
 
 		for (int bY = 1; bY < 5; ++bY) {
@@ -198,7 +198,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		}
 	}
 
-	private void DoLayer_Shore(short[][] result, World world, Random random, int bX, int bZ, int sealevel) {
+	private void doLayerShore(short[][] result, World world, Random random, int bX, int bZ, int sealevel) {
 		int worldMaxHeight = world.getMaxHeight();
 
 		int shoreMinLimitDry = 2;    // Minimum number of blocks in the vertical direction (y-axis)
@@ -229,7 +229,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		// TODO MAYBE: Place gravel below it up until the next solid block so that it doesn't fall down?
 	}
 
-	private void DoLayer_SeaBed(short[][] result, World world, Random random, int bX, int bZ, int sealevel) {
+	private void doLayerSeabed(short[][] result, World world, Random random, int bX, int bZ, int sealevel) {
 		int highestBlockY = findHighestBlockY(result, world, bX, bZ);
 
 		if (highestBlockY <= sealevel) {
@@ -245,7 +245,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		}
 	}
 
-	private void DoLayer_Sea(short[][] result, World world, Random random, int bX, int bZ, int sealevel) {
+	private void doLayerSea(short[][] result, World world, Random random, int bX, int bZ, int sealevel) {
 		int worldMaxHeight = world.getMaxHeight();
 
 		// Find the highest block.
@@ -259,7 +259,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		}
 	}
 
-	private void DoLayer_GrassAndDirt(short[][] result, World world, Random random, int bX, int bZ) {
+	private void doLayerGrassAndDirt(short[][] result, World world, Random random, int bX, int bZ) {
 		// Overlay grass, dirt below it.
 
 		int highestBlockY = findHighestBlockY(result, world, bX, bZ);
@@ -286,7 +286,7 @@ public class FjordChunkGenerator extends ChunkGenerator {
 		setBlock(result, bX, highestBlockY, bZ, (short) Material.GRASS.getId());
 	}
 
-	private void DoLayer_Snow(short[][] result, World world, Random random, int bX, int bZ, int taigaBorder) {
+	private void doLayerSnow(short[][] result, World world, Random random, int bX, int bZ, int taigaBorder) {
 		int highestBlockY = findHighestBlockY(result, world, bX, bZ);
 
 		int snowMinTransitionHeight = -2;
