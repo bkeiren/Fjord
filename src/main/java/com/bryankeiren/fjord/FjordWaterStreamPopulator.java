@@ -23,11 +23,11 @@ public class FjordWaterStreamPopulator extends BlockPopulator {
 
 			Block highest = world.getHighestBlockAt(realX, realZ);
 
-			CutStream(highest.getRelative(BlockFace.DOWN), 1 + random.nextInt(3));
+			cutStream(highest.getRelative(BlockFace.DOWN), 1 + random.nextInt(3));
 		}
 	}
 
-	private void CutStream(Block origin, int streamWidth) {
+	private void cutStream(Block origin, int streamWidth) {
 		if (origin == null) {
 			return;
 		}
