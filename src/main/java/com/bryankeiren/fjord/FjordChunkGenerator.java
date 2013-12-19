@@ -102,9 +102,9 @@ public class FjordChunkGenerator extends ChunkGenerator {
 					float lerpFactor = 1.0f;
 					if (plainsValue >= 0.35) {
 						// Between 0.5 and 0.35 we want to smoothly change the terrain instead of having a sudden change at 0.5.
-						lerpFactor = Util.LerpFactor(0.5f, 0.35f, (float) plainsValue);
+						lerpFactor = Util.lerpFactor(0.5f, 0.35f, (float) plainsValue);
 					}
-					noiseValue = sealevel * Util.Lerp(0.0f, 1.0f, lerpFactor) + noiseValue * Util.Lerp(1.0f, 0.1f, lerpFactor);
+					noiseValue = sealevel * Util.lerp(0.0f, 1.0f, lerpFactor) + noiseValue * Util.lerp(1.0f, 0.1f, lerpFactor);
 				}
 
 				for (int bY = 1; bY < noiseValue && bY < worldMaxHeight; ++bY) {
