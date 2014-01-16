@@ -96,16 +96,11 @@ public class FjordChunkGenerator extends ChunkGenerator
     	Block highestBlock = world.getHighestBlockAt(x, z).getRelative(BlockFace.DOWN);
     	
     	Material highestBlockType = highestBlock.getType();
-    	if (highestBlockType == Material.SAND ||
-    		highestBlockType == Material.GRAVEL ||
-    		highestBlockType == Material.GRASS ||
-    		highestBlockType == Material.STONE)
-    	{
-    		return true;
-    	}
-    	
-    	return false;
-    }
+		return highestBlockType == Material.SAND ||
+				highestBlockType == Material.GRAVEL ||
+				highestBlockType == Material.GRASS ||
+				highestBlockType == Material.STONE;
+	}
     
     //This converts relative chunk locations to bytes that can be written to the chunk
     public int xyzToByte(int x, int y, int z) 
