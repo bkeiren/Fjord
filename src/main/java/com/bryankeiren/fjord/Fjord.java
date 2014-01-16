@@ -1,14 +1,14 @@
 package com.bryankeiren.fjord;
 
+import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.logging.Level;
-
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.generator.ChunkGenerator;
 
 public final class Fjord extends JavaPlugin
 {
@@ -53,12 +53,12 @@ public final class Fjord extends JavaPlugin
 	    try 
 	    {
 	    	File file = new File(_FileOutsideJar);
-	    	if (!file.exists())
+	    	if (!file.exists() && !file.createNewFile())
 	    	{
-		    	file.createNewFile();
+		    	return;
 	    	}
 	        resStreamOut = new FileOutputStream(file);
-	        while ((readBytes = stream.read(buffer)) > 0) 
+	        while ((readBytes = stream != null ? stream.read(buffer) : 0) > 0)
 	        {
 	            resStreamOut.write(buffer, 0, readBytes);
 	        }
